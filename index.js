@@ -1,23 +1,24 @@
+// importar Express
+const express = require("express");
 
-const express=require('express');
+// Importando o roteador
+const PizzasRouter = require("./routers/PizzasRouter");
 
-//importando a rotas//
-const PizzasRouter=require('./routers/PizzasRouter');
+// Criar o servidor
+const server = express();
 
-//Criar o servidor//
-const server=express();
-
-
-//configurando o template endine do js
-//criar o ejs
+// Configurar o View engine para EJS
 server.set("view engine", "ejs");
+// essa linha só é necessaria caso precise renomear a pasta ou mudar a rota
+server.set('views', './views');
 
-//caminho da pasta de views
-//server.set('views', './views');
+//confgurar a pasta public
+server.use(express.static(__dirname + '/public'));
 
+// Criar a rota respondendo a requisição
+server.use('/', PizzasRouter);
 
-//criar a rota respondendo a requisição
-    server.use('/',PizzasRouter);
-
-server.listen(3000,()=>{console.log("Servidor rodando na porta 3000")});
-
+// Levantando o servidor
+server.listen(3000, ()=>{
+    console.log("servidor rodando...")
+});
