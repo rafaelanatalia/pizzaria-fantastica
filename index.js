@@ -3,6 +3,7 @@ const express = require("express");
 
 // Importando o roteador
 const PizzasRouter = require("./routers/PizzasRouter");
+const AdmRouter=require("./routers/AdmRouter");
 
 // Criar o servidor
 const server = express();
@@ -17,6 +18,8 @@ server.use(express.static(__dirname + '/public'));
 
 // Criar a rota respondendo a requisição
 server.use('/', PizzasRouter);
+server.use('/adm',AdmRouter);
+
 
 // Levantando o servidor
 server.listen(3000, ()=>{

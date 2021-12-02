@@ -1,5 +1,6 @@
 const pizzas = require('../database/Pizzas.json')
 
+
 module.exports =controller = {
     listar: (req, res)=> {
         return res.render('index',{pizzas, busca:""});
@@ -28,5 +29,8 @@ module.exports =controller = {
             
         //rendenizar a view index passando para ela as pizzas filtradas
         res.render('index',{pizzas:pizzasFiltras, busca:string});
+    },
+    create:(req,res)=>{
+        res.render("crud-pizzas/create.ejs")
     }
 }

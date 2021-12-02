@@ -9,6 +9,7 @@ const PizzasController = require('../controllers/PizzasController');
 module.exports = router = express.Router();
 
 //Definir rotas às quais ele responde
+
 router.get('/busca',PizzasController.busca)
 router.get('/', PizzasController.listar);
 router.get('/pizzas', PizzasController.listar);
