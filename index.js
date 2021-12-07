@@ -13,8 +13,14 @@ server.set("view engine", "ejs");
 // essa linha só é necessaria caso precise renomear a pasta ou mudar a rota
 server.set('views', './views');
 
+//config o pross.. de usuario
+server.use(express.json());
+server.use(express.urlencoded({extended:false}));
+
+
 //confgurar a pasta public
 server.use(express.static(__dirname + '/public'));
+
 
 // Criar a rota respondendo a requisição
 server.use('/', PizzasRouter);

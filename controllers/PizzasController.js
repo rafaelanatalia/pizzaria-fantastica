@@ -1,5 +1,5 @@
 const pizzas = require('../database/Pizzas.json')
-
+const fs= require('fs')
 
 module.exports =controller = {
     listar: (req, res)=> {
@@ -32,5 +32,30 @@ module.exports =controller = {
     },
     create:(req,res)=>{
         res.render("crud-pizzas/create.ejs")
+    },
+    store: (req,res) => {
+
+        const nome = req.body.nome;
+        const ingredientes = req.body.ingredientes.split(',').map(a => a.trim());
+        const preco = Number(req.body.preco);
+        const pizza = {nome, ingredientes, preco, img:""}
+        
+        // Adicionar o id à pizza recém criada
+        pizza.id=pizzas[pizza.length-1].id+1;
+        // Adicionar a pizza ao array de pizzas
+        pizza.push(pizza);
+        // Salvar o json do array de pizzas no arquivo Pizzas.json
+        // fs.writeFileSync(...)
+        fs.writeFileSync(
+            __dirname+'/../database/pizzas.json',
+            Json.stringify(pizzas,null,4),
+            {flag:'w'}
+            
+            );
+        // Direcionar o usuário para a página que exibe a lista de pizzas
+        // res.redirect(...)
+        
+        res.redirect('/adm/pizzas');
+
     }
 }
