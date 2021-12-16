@@ -24,10 +24,12 @@ const UsuarioLogado = require('../middlewares/UsuarioLogado');
 const router = express.Router();
 
 // Definir rotas às quais ele responde
-router.get('/pizzas/create',UsuarioLogado, PizzasController.create);
-router.post('/pizzas/create', upload.single('img'), ValidadorDeFormPizza, PizzasController.store);
+router.get('/pizzas/create', UsuarioLogado, PizzasController.create);
+router.post('/pizzas/create', UsuarioLogado, upload.single('img'), ValidadorDeFormPizza, PizzasController.store);
 router.get('/login', AdmController.showLogin);
 router.post('/login', AdmController.login);
+router.get('/logout',AdmController.logout)
 
-// Exportar o roteador
+
+// Exportar o roteador 
 module.exports = router;

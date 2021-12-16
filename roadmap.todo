@@ -14,5 +14,11 @@ Passo 2: Exibindo o formulário de login:
     ✔ Criar o AdmController.showLogin fazendo com que ele exiba a view login.ejs @done(21-12-14 09:33)
     ✔ A view login.ejs tem campo email, senha e botão de logar. @done(21-12-14 09:37)
     ✔ Direcionar o form de login para a rota post /adm/login @done(21-12-14 09:44)
-    ☐ Criar uma rota POST para /adm/login no AdmRouter deve direcionar para o controller AdmController.login
-    ☐ Criar o controller AdmController.login que exibe msg ok
+    ✔ Criar uma rota POST para /adm/login no AdmRouter deve direcionar para o controller AdmController.login @started(21-12-16 10:55) @done(21-12-16 10:56) @lasted(1m1s)
+    ✔ Criar o controller AdmController.login que exibe msg ok @done(21-12-16 10:56)
+
+    Passo 3: Fazer o Logout:
+        ☐ Criar uma rota GET /adm/logout que direcione o req para um controller AdmController.logout
+        ☐ Criar o controller AdmController.logout
+        ☐ Fazer com que o AdmController.logout set a session.usuario como undefined e direcione o usuário para tela de login
+    
