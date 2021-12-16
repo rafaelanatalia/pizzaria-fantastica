@@ -1,18 +1,29 @@
-<%- include('parts/head',{title:'Pizzaria Fantástica'}); %>
-<link rel="stylesheet" href="/assets/css/pizza.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pizzaria Fantástica</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+	<link rel="stylesheet" href="/css/pizza.css">
 	<main>
 		<h1><%= pizza.nome %></h1>
-		<h2><%= pizza.preco.toLocaleString('pt-br', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' }) %></h2>
-		<img src="<%= pizza.img %>" alt="<%= pizza.nome %>">
-		<div>Ingredientes: <%= pizza.ingredientes.join(", ") %></div>
+		<h2><%= pizza.preco.toLocaleString('pt-br', { minimumFractionDigits: 2 , style: 'currency', currency: 'BRL' })
+			%></h2>
+		<img src="<%= pizza.img %>" alt="Quatro Queijos">
+		<div>Ingredientes: <%= pizza.ingredientes %></div>
 		<button>+ Add</button>
-		
-		<% if(idPrev){ %>
-		<a href="/pizzas/<%= idPrev %>" class="prev">&lt;</a>
-		<% } %>
+		<% if(idPrev != undefined) { %>
+			<a href="/pizzas/<%= idPrev %>" class="prev">&lt;</a>
+			<% } %>
 
-		<% if(idNext){ %>
+		<% if(idNext != undefined) { %>
 		<a href="/pizzas/<%= idNext %>" class="next">&gt;</a>
 		<% } %>
+
 	</main>
-	<%- include('parts/foot'); %>
+</body>
+</html>

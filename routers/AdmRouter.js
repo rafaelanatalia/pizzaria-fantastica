@@ -1,10 +1,33 @@
+// Importar o express
+const express = require('express');
+const ValidadorDeFormPizza = require('../middlewares/ValidadorDeFormPizza');
+const AdmController = require("../controllers/AdmController");
 
-const { Router } = require("express");
-const express = require("express");
+const multer = require('multer');
+const storage = multer.diskStorage(
+    {
+        destination: (req, file, cb) => {cb(null, __dirname + '/../public/img')},
+        filename: (req, file, cb) => {
+            console.log(file);
+            cb(null,Date.now() + '-' + file.originalname);
+        }
+    }
+);
+const upload = multer({storage})
+
+
+// Importar o PizzasController
 const PizzasController = require('../controllers/PizzasController');
+const UsuarioLogado = require('../middlewares/UsuarioLogado');
 
-//Criar roteador // Expostar o roteador
-module.exports = AdmRouter = express.Router();
+// Criar roteador
+const router = express.Router();
 
-AdmRouter.get('/pizzas/create',(PizzasController.create));
-AdmRouter.post('/pizzas/create',(PizzasController.store));
+// Definir rotas às quais ele responde
+router.get('/pizzas/create',UsuarioLogado, PizzasController.create);
+router.post('/pizzas/create', upload.single('img'), ValidadorDeFormPizza, PizzasController.store);
+router.get('/login', AdmController.showLogin);
+router.post('/login', AdmController.login);
+
+// Exportar o roteador
+module.exports = router;

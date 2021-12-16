@@ -1,33 +1,34 @@
-// importar Express
-const express = require("express");
+// importar o express
+const express = require('express');
 
 // Importando o roteador
-const PizzasRouter = require("./routers/PizzasRouter");
-const AdmRouter=require("./routers/AdmRouter");
+const PizzasRouter = require('./routers/PizzasRouter');
+const AdmRouter = require('./routers/AdmRouter');
 
-// Criar o servidor
-const server = express();
+// Importando os middlewares
+const LogMiddleware = require('./middlewares/LogMiddleware');
 
-// Configurar o View engine para EJS
-server.set("view engine", "ejs");
-// essa linha só é necessaria caso precise renomear a pasta ou mudar a rota
-server.set('views', './views');
+// criar o servidor
+const app = express();
 
-//config o pross.. de usuario
-server.use(express.json());
-server.use(express.urlencoded({extended:false}));
+// Configurando o template engine EJS
+app.set("view engine","ejs");
+app.set("views", "./views");
 
-
-//confgurar a pasta public
-server.use(express.static(__dirname + '/public'));
+// Configurando o processamento de formulários
+app.use(express.json());
+app.use(express.urlencoded({extended:false}));
 
 
-// Criar a rota respondendo a requisição
-server.use('/', PizzasRouter);
-server.use('/adm',AdmRouter);
+// Configurar a pasta public
+app.use(express.static(__dirname + '/public'));
 
+// Middleware de LOG:
+ app.use(LogMiddleware);
 
-// Levantando o servidor
-server.listen(3000, ()=>{
-    console.log("servidor rodando...")
-});
+// criar a rota respondendo a requisição
+app.use('/', PizzasRouter);
+app.use('/adm', AdmRouter);
+
+// levantar o servidor
+app.listen(3000, ()=>{console.log("servir rodando...")})
